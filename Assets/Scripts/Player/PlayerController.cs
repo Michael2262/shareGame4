@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,15 +10,22 @@ public class PlayerController : MonoBehaviour
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
     private Rigidbody2D rb;
+
+    [Header("基本參數")]
     public float speed;
+    public float jumpForce;
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         //實例化出來，使用=進行賦值，Awake快於OnEnabl快於star
         inputControl = new PlayerInputControl();
-
-        rb = GetComponent<Rigidbody2D>();
+        //+=註冊一個新函數，待按鍵按下時執行
+        inputControl.Gameplay.Jump.started += Jump;
     }
+
+    
 
     private void OnEnable()
     {
@@ -44,7 +52,25 @@ public class PlayerController : MonoBehaviour
     //void代表沒有返回值，就是一個基本的函數
     public void Move()
     {
-        //velocity速度。Time.deltaTime時間修正
+        //velocity=速度。Time.deltaTime=時間修正(可以讓不同設備沒有時間差)
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime,rb.velocity.y);
+
+        //臨時變量，藉由(int)將浮點數強制改成int
+        int faceDir = (int)transform.localScale.x;
+
+        if (inputDirection.x > 0)
+            faceDir = 1;
+        if (inputDirection.x < 0)
+            faceDir = -1;
+        
+        //人物翻轉
+        transform.localScale = new Vector3(faceDir,1,1);
+    }
+
+    //註冊函數有固定寫法，在()內
+    private void Jump(InputAction.CallbackContext obj)
+    {
+        //Debug.Log("JUMP");
+        rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
     }
 }
