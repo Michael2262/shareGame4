@@ -44,7 +44,18 @@ public class PlayerController : MonoBehaviour
     //void代表沒有返回值，就是一個基本的函數
     public void Move()
     {
-        //velocity速度。Time.deltaTime時間修正
+        //velocity=速度。Time.deltaTime=時間修正(可以讓不同設備沒有時間差)
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime,rb.velocity.y);
+
+        //臨時變量，藉由(int)將浮點數強制改成int
+        int faceDir = (int)transform.localScale.x;
+
+        if (inputDirection.x > 0)
+            faceDir = 1;
+        if (inputDirection.x < 0)
+            faceDir = -1;
+        
+        //人物翻轉
+        transform.localScale = new Vector3(faceDir,1,1);
     }
 }
