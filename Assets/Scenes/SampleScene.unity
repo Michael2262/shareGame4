@@ -4839,6 +4839,7 @@ GameObject:
   - component: {fileID: 1553417430}
   - component: {fileID: 1553417429}
   - component: {fileID: 1553417431}
+  - component: {fileID: 1553417432}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4964,6 +4965,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputDirection: {x: 0, y: 0}
   speed: 290
+  jumpForce: 16.5
+--- !u!114 &1553417432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553417426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ff7d127012fd2469f05ac23e37effe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1740554775
 GameObject:
   m_ObjectHideFlags: 0
@@ -5623,7 +5637,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 17, y: -6, z: 0}
@@ -5853,7 +5867,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 22, y: -3, z: 0}
@@ -5913,7 +5927,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 21, y: -2, z: 0}
@@ -6003,7 +6017,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 23, y: -1, z: 0}
