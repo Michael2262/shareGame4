@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class PhysicsCheck : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("浪代把计")]
+    public Vector2 bottomOffset;
+    public float checkRaduis;
+
+    public LayerMask groundLayer;    
+    
+    [Header("篈")]
+    public bool isGround;
+    
+    private void Update()
     {
-        
+        check();
     }
 
-    // Update is called once per frame
-    void Update()
+    void check() 
     {
-        
+        //浪代
+        isGround = Physics2D.OverlapCircle((Vector2)transform.position, checkRaduis, groundLayer);
+    }
+
+    //Gizmo徊絬
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, checkRaduis);
     }
 }

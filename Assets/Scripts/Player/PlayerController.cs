@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
     private Rigidbody2D rb;
+    private PhysicsCheck physicsCheck;
 
     [Header("基本參數")]
     public float speed;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        physicsCheck = GetComponent<PhysicsCheck>();
 
         //實例化出來，使用=進行賦值，Awake快於OnEnabl快於star
         inputControl = new PlayerInputControl();
@@ -71,6 +73,7 @@ public class PlayerController : MonoBehaviour
     private void Jump(InputAction.CallbackContext obj)
     {
         //Debug.Log("JUMP");
-        rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
+        if (physicsCheck.isGround)
+            rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
     }
 }
