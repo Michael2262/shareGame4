@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("基本參數")]
     public float speed;
+    //=> 符號表示箭頭運算符，也被稱為Lambda 運算符，用於定義一個簡短的匿名函數
+    private float runSpeed;
+    private float walkSpeed => speed / 2.5f;
+
     public float jumpForce;
 
     private void Awake()
@@ -25,9 +29,24 @@ public class PlayerController : MonoBehaviour
         inputControl = new PlayerInputControl();
         //+=註冊一個新函數，待按鍵按下時執行
         inputControl.Gameplay.Jump.started += Jump;
+
+        #region 強制走路
+        runSpeed = speed;
+
+        inputControl.Gameplay.WalkButton.performed += ctx =>
+        {
+            if (physicsCheck.isGround)
+                speed = walkSpeed;
+        };
+        inputControl.Gameplay.WalkButton.canceled += ctx =>
+        {
+            if (physicsCheck.isGround)
+                speed = runSpeed;
+        };
+        #endregion 
     }
 
-    
+
 
     private void OnEnable()
     {
