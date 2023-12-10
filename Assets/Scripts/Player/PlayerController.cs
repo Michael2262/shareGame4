@@ -70,6 +70,13 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
+
+    //測試
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    Debug.Log(other.name);
+    //}
+
     //void代表沒有返回值，就是一個基本的函數
     public void Move()
     {
