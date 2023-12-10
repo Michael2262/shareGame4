@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    //測試
+    //測試OnTrigger看碰撞器有無交叉
     //private void OnTriggerStay2D(Collider2D other)
     //{
     //    Debug.Log(other.name);
