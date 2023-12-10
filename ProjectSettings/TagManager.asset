@@ -15,7 +15,7 @@ TagManager:
   - Background
   - Platform
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Platforrm
     uniqueID: 2479458833
+    locked: 0
+  - name: Middle
+    uniqueID: 1956233509
     locked: 0
   - name: Player
     uniqueID: 1788007457
