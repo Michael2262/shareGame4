@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour
     private float walkSpeed => speed / 2.5f;
 
     public float jumpForce;
+    public float crouchJumpForce;
     public bool isCrouch;
-    public Vector2 originaOffset;
-    public Vector2 originbSize;
+    private Vector2 originaOffset;
+    private Vector2 originbSize;
 
     private void Awake()
     {
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
     {
         //主要移動方法
         //velocity=速度。Time.deltaTime=時間修正(可以讓不同設備沒有時間差)
-        if(!isCrouch)
+        if(!isCrouch || !physicsCheck.isGround)
             rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime,rb.velocity.y);
 
         //臨時變量，藉由(int)將浮點數強制改成int
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(faceDir,1,1);
 
         //下蹲
+
         isCrouch = inputDirection.y < -0.5f && physicsCheck.isGround;
         if (isCrouch) 
         {
@@ -126,7 +128,9 @@ public class PlayerController : MonoBehaviour
     private void Jump(InputAction.CallbackContext obj)
     {
         //Debug.Log("JUMP");
-        if (physicsCheck.isGround)
+        if (physicsCheck.isGround && !isCrouch)
             rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
+        if (physicsCheck.isGround && isCrouch)
+            rb.AddForce(transform.up * crouchJumpForce, ForceMode2D.Impulse);
     }
 }
