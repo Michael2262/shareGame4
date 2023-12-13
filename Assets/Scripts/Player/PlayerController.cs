@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
     private Rigidbody2D rb;
+    private CapsuleCollider2D coll;
     private PhysicsCheck physicsCheck;
 
     [Header("基本參數")]
@@ -19,11 +20,19 @@ public class PlayerController : MonoBehaviour
     private float walkSpeed => speed / 2.5f;
 
     public float jumpForce;
+    public bool isCrouch;
+    public Vector2 originaOffset;
+    public Vector2 originbSize;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
+        coll = GetComponent<CapsuleCollider2D>();
+
+        originaOffset = coll.offset;
+        originbSize = coll.size;
+        
 
         //實例化出來，使用=進行賦值，Awake快於OnEnabl快於star
         inputControl = new PlayerInputControl();
@@ -80,8 +89,10 @@ public class PlayerController : MonoBehaviour
     //void代表沒有返回值，就是一個基本的函數
     public void Move()
     {
+        //主要移動方法
         //velocity=速度。Time.deltaTime=時間修正(可以讓不同設備沒有時間差)
-        rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime,rb.velocity.y);
+        if(!isCrouch)
+            rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime,rb.velocity.y);
 
         //臨時變量，藉由(int)將浮點數強制改成int
         int faceDir = (int)transform.localScale.x;
@@ -93,6 +104,22 @@ public class PlayerController : MonoBehaviour
         
         //人物翻轉
         transform.localScale = new Vector3(faceDir,1,1);
+
+        //下蹲
+        isCrouch = inputDirection.y < -0.5f && physicsCheck.isGround;
+        if (isCrouch) 
+        {
+            //修改碰撞體大小
+            coll.offset = new Vector2(-0.08f, 0.54f);
+            coll.size = new Vector2(0.79f, 1.05f);
+
+        }
+        else 
+        {
+            //返回碰撞體大小
+            coll.size = originbSize;
+            coll.offset = originaOffset;
+        }
     }
 
     //註冊函數有固定寫法，在()內
