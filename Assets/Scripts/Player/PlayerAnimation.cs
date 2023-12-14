@@ -31,4 +31,10 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("isCrouch", playerController.isCrouch);
     }
 
+
+    public void PlayHurt() 
+    {
+        //Trigger是單次執行的函數方法，不要放在update裡
+        anim.SetTrigger("hurt");
+    }
 }

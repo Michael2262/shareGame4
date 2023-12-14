@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Character : MonoBehaviour
     public float invulnerableDuration;
     private float invulnerableCounter;
     public bool invulnerable;
+
+    //使用Unity事件寫法，在外面用加號把各種方法註冊到此事件中
+    public UnityEvent<Transform> OnTakeDamage;
 
     private void Start()
     {
@@ -42,6 +46,8 @@ public class Character : MonoBehaviour
         {
             currentHealth -= attacker.damage;
             TriggerInvulnerable();
+            //執行受傷，?是用來如果沒有就跳過，不要報錯。Invoke是啟動
+            OnTakeDamage?.Invoke(attacker.transform);
         }
         else 
         {
