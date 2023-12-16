@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
 
     //使用Unity事件寫法，在外面用加號把各種方法註冊到此事件中
     public UnityEvent<Transform> OnTakeDamage;
+    public UnityEvent OnDie;
 
     private void Start()
     {
@@ -53,6 +54,7 @@ public class Character : MonoBehaviour
         {
             currentHealth = 0;
             //觸發死亡
+            OnDie?.Invoke() ;
         }
 
         

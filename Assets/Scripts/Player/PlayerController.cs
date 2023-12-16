@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 originaOffset;
     private Vector2 originbSize;
 
+    public float hurtForce;
+    public bool isHurt;
+    public bool isDead;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -78,7 +82,8 @@ public class PlayerController : MonoBehaviour
     //根據固定時間0.02s刷新，較不理硬體設備，適合物理使用
     private void FixedUpdate()
     {
-        Move();
+        if (!isHurt)
+            Move();
     }
 
     //測試OnTrigger看碰撞器有無交叉
@@ -132,5 +137,23 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
         if (physicsCheck.isGround && isCrouch)
             rb.AddForce(transform.up * crouchJumpForce, ForceMode2D.Impulse);
+    }
+
+    public void GetHurt(Transform attacker) 
+    {
+        isHurt = true;
+        rb.velocity = Vector2.zero;
+        //.normalized"歸一化"表示方向而不關心具體的大小
+        Vector2 dir = new Vector2((transform.position.x - attacker.position.x), 0).normalized;
+
+        rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
+    }
+
+    public void PlayerDead() 
+    {
+        isDead = true;
+        inputControl.Gameplay.Disable();
+
+
     }
 }
