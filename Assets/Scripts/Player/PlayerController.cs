@@ -12,28 +12,33 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D coll;
     private PhysicsCheck physicsCheck;
+    private PlayerAnimation playerAnimation;
 
     [Header("基本參數")]
     public float speed;
     //=> 符號表示箭頭運算符，也被稱為Lambda 運算符，用於定義一個簡短的匿名函數
     private float runSpeed;
     private float walkSpeed => speed / 2.5f;
-
     public float jumpForce;
-    public float crouchJumpForce;
-    public bool isCrouch;
+    //public int combo;
+
     private Vector2 originaOffset;
     private Vector2 originbSize;
 
+    [Header("狀態")]
+    public float crouchJumpForce;
+    public bool isCrouch;
     public float hurtForce;
     public bool isHurt;
     public bool isDead;
+    public bool isAttack;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         physicsCheck = GetComponent<PhysicsCheck>();
         coll = GetComponent<CapsuleCollider2D>();
+        playerAnimation = GetComponent<PlayerAnimation>();
 
         originaOffset = coll.offset;
         originbSize = coll.size;
@@ -41,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
         //實例化出來，使用=進行賦值，Awake快於OnEnabl快於star
         inputControl = new PlayerInputControl();
-        //+=註冊一個新函數，待按鍵按下時執行
+        //跳躍，+=註冊一個新函數，待按鍵按下時執行
         inputControl.Gameplay.Jump.started += Jump;
 
         #region 強制走路
@@ -58,9 +63,12 @@ public class PlayerController : MonoBehaviour
                 speed = runSpeed;
         };
         #endregion 
+
+        //攻擊
+        inputControl.Gameplay.Attack.started += PlayerAttack;
     }
 
-
+    
 
     private void OnEnable()
     {
@@ -139,6 +147,17 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(transform.up * crouchJumpForce, ForceMode2D.Impulse);
     }
 
+    private void PlayerAttack(InputAction.CallbackContext obj)
+    {
+        playerAnimation.PlayerAttack();
+        isAttack = true;
+        //combo++;
+        //if (combo >= 3)
+        //    combo = 0;
+    }
+
+    #region UnityEvent
+
     public void GetHurt(Transform attacker) 
     {
         isHurt = true;
@@ -156,4 +175,6 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
+    #endregion
 }

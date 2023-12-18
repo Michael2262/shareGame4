@@ -30,6 +30,9 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("isGround", physicsCheck.isGround);
         anim.SetBool("isCrouch", playerController.isCrouch);
         anim.SetBool("isDead", playerController.isDead);
+        anim.SetBool("isAttack", playerController.isAttack);
+        //anim.SetInteger("combo", playerController.combo);
+
     }
 
 
@@ -37,5 +40,10 @@ public class PlayerAnimation : MonoBehaviour
     {
         //Trigger是單次執行的函數方法，不要放在update裡
         anim.SetTrigger("hurt");
+    }
+
+    public void PlayerAttack() 
+    {
+        anim.SetTrigger("attack");
     }
 }
