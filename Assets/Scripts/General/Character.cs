@@ -14,6 +14,11 @@ public class Character : MonoBehaviour
     private float invulnerableCounter;
     public bool invulnerable;
 
+    [Header("不能動作時間")]
+    public float cantControlDuration;
+    private float cantControlCounter;
+    public bool controlable;
+
     //使用Unity事件寫法，在外面用加號把各種方法註冊到此事件中
     public UnityEvent<Transform> OnTakeDamage;
     public UnityEvent OnDie;
@@ -21,6 +26,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        controlable = true;
     }
 
     //計時器相關放進update中
@@ -35,6 +41,17 @@ public class Character : MonoBehaviour
             }
 
         }
+
+        if (!controlable)
+        {
+            cantControlCounter -= Time.deltaTime;
+            if (cantControlCounter <= 0)
+            {
+                controlable = true;
+            }
+
+        }
+
     }
 
     public void TakeDamage(Attack attacker) 
@@ -67,5 +84,11 @@ public class Character : MonoBehaviour
             invulnerable = true;
             invulnerableCounter = invulnerableDuration;
         }
+        if (controlable)
+        {
+            controlable = false;
+            cantControlCounter = cantControlDuration;
+        }
+
     }
 }

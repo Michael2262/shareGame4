@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D coll;
     private PhysicsCheck physicsCheck;
     private PlayerAnimation playerAnimation;
+    private Character character;
 
     [Header("基本參數")]
     public float speed;
@@ -24,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 originaOffset;
     private Vector2 originbSize;
+
+    [Header("物理材質")]
+    public PhysicsMaterial2D normal;
+    public PhysicsMaterial2D wall;
 
     [Header("狀態")]
     public float crouchJumpForce;
@@ -39,10 +44,13 @@ public class PlayerController : MonoBehaviour
         physicsCheck = GetComponent<PhysicsCheck>();
         coll = GetComponent<CapsuleCollider2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        character = GetComponent<Character>();
 
         originaOffset = coll.offset;
         originbSize = coll.size;
         
+
+       
 
         //實例化出來，使用=進行賦值，Awake快於OnEnabl快於star
         inputControl = new PlayerInputControl();
@@ -86,11 +94,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         inputDirection = inputControl.Gameplay.Move.ReadValue<Vector2>();
+        CheckState();
+
     }
     //根據固定時間0.02s刷新，較不理硬體設備，適合物理使用
     private void FixedUpdate()
     {
-        if (!isHurt)
+        if (!isHurt && !isAttack)
             Move();
     }
 
@@ -141,20 +151,42 @@ public class PlayerController : MonoBehaviour
     private void Jump(InputAction.CallbackContext obj)
     {
         //Debug.Log("JUMP");
-        if (physicsCheck.isGround && !isCrouch)
-            rb.AddForce(transform.up*jumpForce,ForceMode2D.Impulse);
-        if (physicsCheck.isGround && isCrouch)
-            rb.AddForce(transform.up * crouchJumpForce, ForceMode2D.Impulse);
+        //if (character.controlable)
+        //{
+            if (physicsCheck.isGround && !isCrouch)
+                rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            if (physicsCheck.isGround && isCrouch)
+                rb.AddForce(transform.up * crouchJumpForce, ForceMode2D.Impulse);
+        //}
+        
     }
 
     private void PlayerAttack(InputAction.CallbackContext obj)
     {
-        playerAnimation.PlayerAttack();
-        isAttack = true;
+        
+        
+        //playerAnimation.PlayerAttack();
+        //isAttack = true;
+
+
+
+        if (character.controlable) 
+        {
+            playerAnimation.PlayerAttack();
+            isAttack = true;
+        }
+            
         //combo++;
         //if (combo >= 3)
         //    combo = 0;
     }
+
+    private void CheckState() 
+    {
+        //三元運算符，根據physicsCheck.isGround的值是與否，將碰撞器的物理材料設置為 normal 或 wall
+        coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
+    }
+
 
     #region UnityEvent
 
