@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
-    Animator anim;
+    //protected只有子類能用的，不會像public那麼公開
+    protected Animator anim;
     
     [Header("基本參數")]
     public float normalSpeed;
@@ -17,15 +18,23 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        currentSpeed = normalSpeed;
     }
 
     private void Update()
     {
-        
+        faceDir = new Vector3(-transform.localScale.x, 0, 0);
     }
 
-    public void Move()
+
+    private void FixedUpdate()
     {
-        
+        Move();
+    }
+
+    //virtual可在子類中，用override複寫
+    public virtual void Move()
+    {
+        rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime,rb.velocity.y);
     }
 }
