@@ -163,14 +163,12 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAttack(InputAction.CallbackContext obj)
     {
+
+
+        //return不執行後方函數
         
-        
-        //playerAnimation.PlayerAttack();
-        //isAttack = true;
 
-
-
-        if (character.controlable) 
+        if (physicsCheck.isGround && character.controlable) 
         {
             playerAnimation.PlayerAttack();
             isAttack = true;

@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
             currentHealth -= attacker.damage;
             TriggerInvulnerable();
             //執行受傷，?是用來如果沒有就跳過，不要報錯。Invoke是啟動
-            OnTakeDamage?.Invoke(attacker.transform);
+            OnTakeDamage?.Invoke(attacker.gameObject.transform);
         }
         else 
         {
