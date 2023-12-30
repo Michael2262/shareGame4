@@ -11,7 +11,7 @@ public class Attack : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D other)
     {
-        //?代表如果有這個代碼才會執行
+        //利用other來訪問被攻擊物體上的Component<Character>裡的方法TakeDamage，有可能沒有所以?，
         other.GetComponent<Character>()?.TakeDamage(this);
     }
 }

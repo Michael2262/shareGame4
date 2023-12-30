@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//調用unity事件
 using UnityEngine.Events;
 
 public class Character : MonoBehaviour
@@ -54,6 +55,7 @@ public class Character : MonoBehaviour
 
     }
 
+    //收到一個attack類型的值進來，取名叫attacker(攻擊者)
     public void TakeDamage(Attack attacker) 
     {
         //若免疫直接停止執行
@@ -64,8 +66,8 @@ public class Character : MonoBehaviour
         {
             currentHealth -= attacker.damage;
             TriggerInvulnerable();
-            //執行受傷，?是用來如果沒有就跳過，不要報錯。Invoke是啟動
-            OnTakeDamage?.Invoke(attacker.gameObject.transform);
+            //執行受傷註冊事件(?避免沒有)，Invoke是啟動。註冊事件時，規定需要一個transform
+            OnTakeDamage?.Invoke(attacker.transform);
         }
         else 
         {
