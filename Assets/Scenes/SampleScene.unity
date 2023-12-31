@@ -6477,7 +6477,7 @@ Transform:
   m_GameObject: {fileID: 1174288447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.41, y: 1.08, z: 0}
+  m_LocalPosition: {x: -7.46, y: 1.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6602,7 +6602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940181946c7f2cb4caadc8b1043bf561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   currentHealth: 0
   invulnerableDuration: 1
   invulnerable: 0
@@ -6625,7 +6625,19 @@ MonoBehaviour:
         m_CallState: 2
   OnDie:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1174288456}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1174288454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6678,10 +6690,13 @@ MonoBehaviour:
   chaseSpeed: 260
   currentSpeed: 0
   faceDir: {x: 0, y: 0, z: 0}
+  hurtForce: 9
   attacker: {fileID: 0}
   waitTime: 2
   waitTimeCounter: 0
   wait: 0
+  isHurt: 0
+  isDead: 0
 --- !u!114 &1174288457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7899,7 +7914,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 21, y: -6, z: 0}
@@ -7976,7 +7991,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 22, y: -5, z: 0}
@@ -8130,7 +8145,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 22, y: -3, z: 0}
@@ -8141,7 +8156,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 23, y: -3, z: 0}
@@ -8218,7 +8233,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 23, y: -2, z: 0}
@@ -8262,7 +8277,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 18, y: -1, z: 0}
@@ -8295,7 +8310,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 23, y: -1, z: 0}

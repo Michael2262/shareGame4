@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
 
     //使用Unity事件寫法，在外面用加號把各種方法註冊到此事件中
     public UnityEvent<Transform> OnTakeDamage;
-    public UnityEvent OnDie;
+    public UnityEvent<Transform> OnDie;
 
     private void Start()
     {
@@ -56,7 +56,7 @@ public class Character : MonoBehaviour
     }
 
     //收到一個attack類型的值進來，取名叫attacker(攻擊者)
-    public void TakeDamage(Attack attacker) 
+    public void TakeDamage(Attack attacker = null) 
     {
         //若免疫直接停止執行
         if (invulnerable)
@@ -73,7 +73,7 @@ public class Character : MonoBehaviour
         {
             currentHealth = 0;
             //觸發死亡
-            OnDie?.Invoke() ;
+            OnDie?.Invoke(attacker.transform) ;
         }
 
         
