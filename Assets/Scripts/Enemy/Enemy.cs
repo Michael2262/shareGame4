@@ -5,14 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
-    PhysicsCheck physicsCheck;
-    //protected只有子類能用的，不會像public那麼公開
-    protected Animator anim;
+    //[HideInInspector]不需暴露在Inspector
+    [HideInInspector] public PhysicsCheck physicsCheck;
+    [HideInInspector] public Animator anim;
     
     [Header("基本參數")]
     public float normalSpeed;
     public float chaseSpeed;
-    public float currentSpeed;
+    [HideInInspector] public float currentSpeed;
     public Vector3 faceDir;
     public float hurtForce;
 
@@ -29,15 +29,16 @@ public class Enemy : MonoBehaviour
     public bool isDead;
 
 
-    //抽象類
-    //巡邏狀態
-    protected BaseState patroState;
+    //抽象類，甚麼時候實例化這些狀態呢?在怪物子集中(例如Boar)中創建
     //當前狀態
     protected BaseState currentState;
+    //巡邏狀態
+    protected BaseState patrolState;
     //追擊狀態
     protected BaseState chaseState;
 
-    private void Awake()
+    //表示這個方法是一個虛擬方法，可以被子類別覆寫。當子類別覆寫這個方法時，它可以提供自己的實現。
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -47,8 +48,9 @@ public class Enemy : MonoBehaviour
     //物體被激活時
     private void OnEnable()
     {
-        currentState = patroState;
-        currentState.OnEnable();
+        currentState = patrolState;
+        currentState.OnEnable(this);
+        //呼叫當前"狀態"的 OnEnable 方法，並將當前物件的引用 this 傳遞給該方法。(狀態機)
     }
 
     private void Start()
@@ -59,20 +61,21 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
-        if ((physicsCheck.touchLeftWall && faceDir.x < 0) || (physicsCheck.touchRightWall && faceDir.x > 0))
-        {
-            wait = true;
-            anim.SetBool("walk", false);
-        }
-        TimeCounter();
+        //移至BoarPartolState裡
+        //if ((physicsCheck.touchLeftWall && faceDir.x < 0) || (physicsCheck.touchRightWall && faceDir.x > 0))
+        //{
+        //    wait = true;
+        //    anim.SetBool("walk", false);
+        //}
 
         currentState.LogicUpdate();
+        TimeCounter();
     }
 
     //物理相關
     private void FixedUpdate()
     {
-        if(!isHurt && !isDead)
+        if(!isHurt && !isDead && !wait)
             Move();
         currentState.PhysicsUpdate();
     }
