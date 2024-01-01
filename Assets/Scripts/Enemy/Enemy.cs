@@ -18,6 +18,11 @@ public class Enemy : MonoBehaviour
 
     public Transform attacker;
 
+    [Header("檢測")]
+    public Vector2 centerOffset;
+    public Vector2 checkSize;
+    public float checkDistance;
+    public LayerMask attackLayer;
 
     [Header("計時器")]
     public float waitTime;
@@ -37,6 +42,7 @@ public class Enemy : MonoBehaviour
     //追擊狀態
     protected BaseState chaseState;
 
+    #region 週期函數
     //表示這個方法是一個虛擬方法，可以被子類別覆寫。當子類別覆寫這個方法時，它可以提供自己的實現。
     protected virtual void Awake()
     {
@@ -49,7 +55,7 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         currentState = patrolState;
-        currentState.OnEnable(this);
+        currentState.OnEnter(this);
         //呼叫當前"狀態"的 OnEnable 方法，並將當前物件的引用 this 傳遞給該方法。(狀態機)
     }
 
@@ -85,6 +91,10 @@ public class Enemy : MonoBehaviour
         currentState.OnExit();
     }
 
+    #endregion
+
+    #region 函數方法
+
     //virtual可在子類中，用override複寫
     public virtual void Move()
     {
@@ -105,7 +115,29 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    public bool FoundPlayer()
+    {
+        return Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
+        
+    }
+
+    public void switchState(NPCState state) 
+    {
+        var newState = state switch
+        {
+            NPCState.Patrol => patrolState,
+            NPCState.Chase => chaseState,
+            _=> null
+        };
+
+        currentState.OnExit();
+        currentState = newState;
+        currentState.OnEnter(this);
+    }
+
+    #region Unity事件執行方法
     public void OnTakeDamage( Transform attackTrans) 
     {
         attacker = attackTrans;
@@ -156,5 +188,7 @@ public class Enemy : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+    #endregion
 
 }
