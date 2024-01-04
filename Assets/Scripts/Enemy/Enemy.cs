@@ -123,7 +123,8 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void switchState(NPCState state) 
+    //每次要換狀態時，調用此方法，來自Enums的枚舉變量
+    public void SwitchState(NPCState state) 
     {
         var newState = state switch
         {
@@ -190,5 +191,10 @@ public class Enemy : MonoBehaviour
     }
 
     #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset, 0.2f);
+    }
 
 }
