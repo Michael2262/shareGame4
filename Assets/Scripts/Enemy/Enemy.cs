@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
     public bool isDead;
 
 
-    //抽象類，甚麼時候實例化這些狀態呢?在怪物子集中(例如Boar)中創建
+    //抽象類，甚麼時候實例化這些狀態呢?在怪物子集中(例如Boar)中創建(賦值)
     //當前狀態
     protected BaseState currentState;
     //巡邏狀態
@@ -119,6 +119,8 @@ public class Enemy : MonoBehaviour
 
     public bool FoundPlayer()
     {
+        //var Temp =  Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
+        //這樣可以檢測到底是甚麼類型的值，上面是 RayCastHit的值，但任何值都可以是bool
         return Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
         
     }
@@ -133,9 +135,19 @@ public class Enemy : MonoBehaviour
             _=> null
         };
 
-        currentState.OnExit();
+        //if (currentState != null)
+        //{
+            //Debug.Log("138沒問題");
+            currentState.OnExit();
+        //}
+
         currentState = newState;
-        currentState.OnEnter(this);
+
+        //if (currentState != null)
+        //{
+            //Debug.Log("146沒問題");
+            currentState.OnEnter(this);
+        //}
     }
 
     #region Unity事件執行方法

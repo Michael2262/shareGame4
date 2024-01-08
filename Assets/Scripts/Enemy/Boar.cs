@@ -14,7 +14,9 @@ public class Boar : Enemy
     protected override void Awake()
     {
         base.Awake();
+        //½á­È
         patrolState = new BoarPartolState();
+        chaseState = new BoarChaseState();
     }
 
 }
