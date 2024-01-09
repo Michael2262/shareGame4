@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class Enemy : MonoBehaviour
     public float waitTime;
     public float waitTimeCounter;
     public bool wait;
+    public float lostTime;
+    public float lostTimeCounter;
 
     [Header("狀態")]
     public bool isHurt;
@@ -67,13 +70,6 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         faceDir = new Vector3(-transform.localScale.x, 0, 0);
-        //移至BoarPartolState裡
-        //if ((physicsCheck.touchLeftWall && faceDir.x < 0) || (physicsCheck.touchRightWall && faceDir.x > 0))
-        //{
-        //    wait = true;
-        //    anim.SetBool("walk", false);
-        //}
-
         currentState.LogicUpdate();
         TimeCounter();
     }
@@ -114,6 +110,10 @@ public class Enemy : MonoBehaviour
                 transform.localScale = new Vector3(faceDir.x, 1, 1);
             }
         }
+        if (!FoundPlayer() && lostTimeCounter > 0)
+            lostTimeCounter -= Time.deltaTime;
+        else
+            lostTimeCounter = lostTime;
     }
     #endregion
 
@@ -163,8 +163,8 @@ public class Enemy : MonoBehaviour
         //受傷被擊退
         isHurt = true;
         anim.SetTrigger("hurt");
-        //Vector2 dir = new Vector2((transform.position.x - attackTrans.position.x), 0).normalized;
-            
+        Vector2 dir = new Vector2((transform.position.x - attackTrans.position.x), 0).normalized;
+        rb.velocity = new Vector2(0, rb.velocity.y);    
         //"啟動協程"的固定寫法(順便把臨時變量dir傳進去)
         StartCoroutine(KnockBack(attackTrans));
     }
@@ -206,7 +206,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset, 0.2f);
+        Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset+ new Vector3(checkDistance*-transform.localScale.x,0), 0.2f);
     }
 
 }

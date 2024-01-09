@@ -12,6 +12,7 @@ public class BoarPartolState : BaseState
         //currentEnemy是BaseState定義的一個變數，要求要有Enemy物件
         //呼叫此狀態的物件會把自己身上的Enemy傳進來
         currentEnemy = enemy;
+        currentEnemy.currentSpeed = currentEnemy.normalSpeed;
     }
     public override void LogicUpdate()
     {
@@ -25,6 +26,7 @@ public class BoarPartolState : BaseState
         
         if (!currentEnemy.physicsCheck.isGround || (currentEnemy.physicsCheck.touchLeftWall && currentEnemy.faceDir.x < 0) || (currentEnemy.physicsCheck.touchRightWall && currentEnemy.faceDir.x > 0))
         {
+            
             currentEnemy.wait = true;
             currentEnemy.anim.SetBool("walk", false);
         }
