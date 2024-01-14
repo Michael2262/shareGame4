@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+//一定要有的組件，沒有的會自動添加
+[RequireComponent(typeof(Rigidbody2D),typeof(Animator),typeof(PhysicsCheck))]
+
+
 public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;

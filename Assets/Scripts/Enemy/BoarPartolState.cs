@@ -46,6 +46,6 @@ public class BoarPartolState : BaseState
     {
         //一旦離開此狀態時會觸發
         currentEnemy.anim.SetBool("walk", false);
-        Debug.Log("Exit");
+        //Debug.Log("Exit");
     }
 }
