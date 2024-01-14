@@ -9,6 +9,6 @@ public class Snail : Enemy
         base.Awake();
         //½á­È
         patrolState = new SnailPartolState();
-        //chaseState = new SnailChaseState();
+        chaseState = new SnailPartolState();
     }
 }

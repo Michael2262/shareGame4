@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//一定要有的組件，沒有的會自動添加
+[RequireComponent(typeof(CapsuleCollider2D),typeof(BoxCollider2D))]
+
 public class PhysicsCheck : MonoBehaviour
 {
     private CapsuleCollider2D coll;
