@@ -9,6 +9,9 @@ public class Character : MonoBehaviour
     [Header("基本屬性")]
     public float maxHealth;
     public float currentHealth;
+    public float currentDefence;
+    public float defence = 0f;
+    public float specialDefense = 0f;
 
     [Header("受傷無敵")]
     public float invulnerableDuration;
@@ -27,6 +30,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        currentDefence = defence;
         controlable = true;
     }
 
@@ -59,12 +63,12 @@ public class Character : MonoBehaviour
     public void TakeDamage(Attack attacker = null) 
     {
         //若免疫直接停止執行
-        if (invulnerable)
+        if (invulnerable || (attacker.damage - currentDefence)<0)
             return;
         
-        if(currentHealth - attacker.damage > 0) 
+        if(currentHealth - (attacker.damage) > 0) 
         {
-            currentHealth -= attacker.damage;
+            currentHealth -= (attacker.damage);
             TriggerInvulnerable();
             //執行受傷註冊事件(?避免沒有)，Invoke是啟動。註冊事件時，規定需要一個transform
             OnTakeDamage?.Invoke(attacker.transform);

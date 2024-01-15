@@ -8,6 +8,7 @@ using UnityEngine;
 public class PhysicsCheck : MonoBehaviour
 {
     private CapsuleCollider2D coll;
+    
 
     [Header("檢測參數")]
     public bool manual;
@@ -15,6 +16,7 @@ public class PhysicsCheck : MonoBehaviour
     public Vector2 leftOffset;
     public Vector2 rightOffset;
     public float checkRaduis;
+    public Vector3 faceDir;
 
     public LayerMask groundLayer;    
     
@@ -27,6 +29,7 @@ public class PhysicsCheck : MonoBehaviour
     private void Awake()
     {
         coll = GetComponent<CapsuleCollider2D>();
+        
 
         if (!manual) 
         {
@@ -42,12 +45,14 @@ public class PhysicsCheck : MonoBehaviour
     private void Update()
     {
         check();
+
     }
 
     void check() 
     {
+        faceDir = new Vector3(-transform.localScale.x, 0, 0);
         //檢測地面
-        isGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, checkRaduis, groundLayer);
+        isGround = Physics2D.OverlapCircle((Vector2)transform.position + (bottomOffset* -faceDir.x), checkRaduis, groundLayer);
 
         //牆體判斷
         touchLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, checkRaduis, groundLayer);
@@ -58,7 +63,7 @@ public class PhysicsCheck : MonoBehaviour
     //Gizmo輔助線
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere((Vector2)transform.position + bottomOffset, checkRaduis);
+        Gizmos.DrawWireSphere((Vector2)transform.position + (bottomOffset * -faceDir.x), checkRaduis);
         Gizmos.DrawWireSphere((Vector2)transform.position + leftOffset, checkRaduis);
         Gizmos.DrawWireSphere((Vector2)transform.position + rightOffset, checkRaduis);
     }

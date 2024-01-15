@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
     protected BaseState patrolState;
     //追擊狀態
     protected BaseState chaseState;
+    //特殊技能狀態
+    protected BaseState skillState;
 
     #region 週期函數
     //表示這個方法是一個虛擬方法，可以被子類別覆寫。當子類別覆寫這個方法時，它可以提供自己的實現。
@@ -98,7 +100,9 @@ public class Enemy : MonoBehaviour
     //virtual可在子類中，用override複寫
     public virtual void Move()
     {
-        rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime,rb.velocity.y);
+        //一個蝸牛的額外條件判斷，如果動畫沒有撥第0層的"snailPreMove"，才會動作
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("snailPreMove") && !anim.GetCurrentAnimatorStateInfo(0).IsName("snailRecover"))
+            rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime,rb.velocity.y);
     }
 
     //所有跟計時器相關，都放這兒
@@ -136,12 +140,13 @@ public class Enemy : MonoBehaviour
         {
             NPCState.Patrol => patrolState,
             NPCState.Chase => chaseState,
+            NPCState.Skill => skillState,
             _=> null
         };
 
         //if (currentState != null)
         //{
-            //Debug.Log("138沒問題");
+            
             currentState.OnExit();
         //}
 
@@ -149,7 +154,7 @@ public class Enemy : MonoBehaviour
 
         //if (currentState != null)
         //{
-            //Debug.Log("146沒問題");
+            
             currentState.OnEnter(this);
         //}
     }

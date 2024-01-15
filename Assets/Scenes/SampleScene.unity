@@ -399,7 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 714344011}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6809,7 +6809,7 @@ GameObject:
   - component: {fileID: 1117861655}
   - component: {fileID: 1117861657}
   - component: {fileID: 1117861656}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6909,7 +6909,7 @@ GameObject:
   - component: {fileID: 1444634956}
   - component: {fileID: 1444634958}
   - component: {fileID: 1444634957}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7312,6 +7312,7 @@ MonoBehaviour:
   leftOffset: {x: -0.46, y: 0.88}
   rightOffset: {x: 0.32, y: 0.88}
   checkRaduis: 0.2
+  faceDir: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -7365,6 +7366,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   currentHealth: 0
+  currentDefence: 0
+  defence: 0
+  specialDefense: 0
   invulnerableDuration: 2
   invulnerable: 0
   cantControlDuration: 1
@@ -7418,7 +7422,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553417426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -8402,7 +8406,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: -2, z: 0}
@@ -8468,7 +8472,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 24, y: -2, z: 0}
@@ -8578,7 +8582,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 18, y: 0, z: 0}
@@ -8589,7 +8593,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 21, y: 0, z: 0}
@@ -8666,7 +8670,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 17, y: 2, z: 0}
@@ -8699,7 +8703,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 17, y: 3, z: 0}
@@ -8915,7 +8919,7 @@ GameObject:
   - component: {fileID: 2086076660}
   - component: {fileID: 2086076662}
   - component: {fileID: 2086076661}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Attack2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9031,14 +9035,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ff7d127012fd2469f05ac23e37effe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manual: 0
-  bottomOffset: {x: 0, y: 0}
-  leftOffset: {x: 0, y: 0}
-  rightOffset: {x: 0, y: 0}
-  checkRaduis: 0
+  manual: 1
+  bottomOffset: {x: -1.02, y: 0}
+  leftOffset: {x: -0.96, y: 0.55}
+  rightOffset: {x: 0.94, y: 0.55}
+  checkRaduis: 0.1
+  faceDir: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   isGround: 0
   touchLeftWall: 0
   touchRightWall: 0
@@ -9051,7 +9056,7 @@ Transform:
   m_GameObject: {fileID: 6837400931391582581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.98, y: -8.38, z: 0}
+  m_LocalPosition: {x: -15.58, y: -8.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9119,6 +9124,7 @@ MonoBehaviour:
   leftOffset: {x: -1.31, y: 0.62}
   rightOffset: {x: 1.14, y: 0.62}
   checkRaduis: 0.1
+  faceDir: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -9164,7 +9170,7 @@ MonoBehaviour:
   chaseSpeed: 0
   currentSpeed: 60
   faceDir: {x: -1, y: 0, z: 0}
-  hurtForce: 3
+  hurtForce: 5
   attacker: {fileID: 0}
   centerOffset: {x: 0, y: 0.6}
   checkSize: {x: 1, y: 1}
@@ -9292,7 +9298,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019, y: 0.09}
+  m_Offset: {x: 0.018999994, y: 0.09917906}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -9303,7 +9309,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.46, y: 0.19}
+  m_Size: {x: 1.46, y: 0.17164189}
   m_EdgeRadius: 0
 --- !u!114 &4897528253630982014
 MonoBehaviour:
@@ -9345,7 +9351,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &5148137122153432283
 CapsuleCollider2D:
@@ -9446,9 +9452,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940181946c7f2cb4caadc8b1043bf561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 5
   currentHealth: 30
-  invulnerableDuration: 0
+  currentDefence: 0
+  defence: 0
+  specialDefense: 15
+  invulnerableDuration: 5
   invulnerable: 0
   cantControlDuration: 0
   controlable: 1
@@ -9516,7 +9525,7 @@ Transform:
   m_GameObject: {fileID: 4810639103886594541}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.73, y: 0.62, z: 0}
+  m_LocalPosition: {x: -9.08, y: 0.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9596,7 +9605,7 @@ SpriteRenderer:
   m_SortingLayerID: 1956233509
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1962735318, guid: bd5cb2b4cebbbd7478a3a00249f5134e, type: 3}
+  m_Sprite: {fileID: 1870985527, guid: 7ff489f686727cc4ea83032f8ef8ff6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9621,6 +9630,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 40
   currentHealth: 40
+  currentDefence: 0
+  defence: 0
+  specialDefense: 0
   invulnerableDuration: 1
   invulnerable: 0
   cantControlDuration: 1
