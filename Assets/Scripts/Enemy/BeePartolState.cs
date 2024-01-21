@@ -6,8 +6,10 @@ public class BeePartolState : BaseState
 {
     private Vector3 target;
     private Vector3 moveDir;
-    
-    
+
+    private float changeTargerCounter = 10f;
+
+
     public override void OnEnter(Enemy enemy)
     {
         currentEnemy = enemy;
@@ -16,14 +18,19 @@ public class BeePartolState : BaseState
     }
     public override void LogicUpdate()
     {
-        if(currentEnemy.FoundPlayer())
-           currentEnemy.SwitchState(NPCState.Chase);
+        if (currentEnemy.FoundPlayer())
+        {
+            currentEnemy.SwitchState(NPCState.Chase);
+            
+        }
 
+        changeTargerCounter -= Time.deltaTime;
 
-        if(Mathf.Abs(target.x - currentEnemy.transform.position.x)<0.1f && Mathf.Abs(target.y - currentEnemy.transform.position.y)<0.1f)
+        if ((Mathf.Abs(target.x - currentEnemy.transform.position.x)<0.1f && Mathf.Abs(target.y - currentEnemy.transform.position.y)<0.1f) || (changeTargerCounter<=0f))
         {
             currentEnemy.wait = true;
             target = currentEnemy.GetNewPoint();
+            changeTargerCounter = 10f;
         }
 
         moveDir = (target - currentEnemy.transform.position).normalized;
