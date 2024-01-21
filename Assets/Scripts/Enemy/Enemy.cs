@@ -9,8 +9,8 @@ using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
-    Rigidbody2D rb;
     //[HideInInspector]不需暴露在Inspector
+    [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public PhysicsCheck physicsCheck;
     [HideInInspector] public Animator anim;
     
@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public float currentSpeed;
     public Vector3 faceDir;
     public float hurtForce;
+    //起始位置，會在awake被記錄
+    public Vector3 spwanPoint;
 
     public Transform attacker;
 
@@ -59,6 +61,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         physicsCheck = GetComponent<PhysicsCheck>();
         currentSpeed = normalSpeed;
+        spwanPoint = transform.position;
     }
     //物體被激活時
     private void OnEnable()
@@ -125,7 +128,7 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
-    public bool FoundPlayer()
+    public virtual bool FoundPlayer()
     {
         //var Temp =  Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
         //這樣可以檢測到底是甚麼類型的值，上面是 RayCastHit的值，但任何值都可以是bool
@@ -158,6 +161,13 @@ public class Enemy : MonoBehaviour
             currentState.OnEnter(this);
         //}
     }
+
+    public virtual Vector3 GetNewPoint() 
+    {
+        return transform.position;
+    }
+
+
 
     #region Unity事件執行方法
     public void OnTakeDamage( Transform attackTrans) 
@@ -213,7 +223,7 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position + (Vector3)centerOffset+ new Vector3(checkDistance*-transform.localScale.x,0), 0.2f);
     }
