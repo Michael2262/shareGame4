@@ -26,12 +26,15 @@ public class Character : MonoBehaviour
     //使用Unity事件寫法，在外面用加號把各種方法註冊到此事件中
     public UnityEvent<Transform> OnTakeDamage;
     public UnityEvent<Transform> OnDie;
+    public UnityEvent<Character> OnHealthChange;
+    //第三個事件，要傳character的值進去
 
     private void Start()
     {
         currentHealth = maxHealth;
         currentDefence = defence;
         controlable = true;
+        OnHealthChange?.Invoke(this);
     }
 
     //計時器相關放進update中
@@ -80,6 +83,7 @@ public class Character : MonoBehaviour
             OnDie?.Invoke(attacker.transform) ;
         }
 
+        OnHealthChange?.Invoke(this);
         
     }
 
