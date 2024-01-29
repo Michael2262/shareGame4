@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public float normalSpeed;
     public float chaseSpeed;
     [HideInInspector] public float currentSpeed;
+    public bool ImageDirRight;
     public Vector3 faceDir;
     public float hurtForce;
     //起始位置，會在awake被記錄
@@ -78,7 +79,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        faceDir = new Vector3(-transform.localScale.x, 0, 0);
+        
+        if(ImageDirRight)
+            faceDir = new Vector3(transform.localScale.x, 0, 0);
+        else
+            faceDir = new Vector3(-transform.localScale.x, 0, 0);
         currentState.LogicUpdate();
         TimeCounter();
     }

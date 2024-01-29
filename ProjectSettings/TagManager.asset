@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Bounds
   layers:
   - Default
   - TransparentFX
@@ -53,4 +54,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1788007457
+    locked: 0
+  - name: Bounds
+    uniqueID: 3892116101
     locked: 0
