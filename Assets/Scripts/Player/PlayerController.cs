@@ -183,6 +183,12 @@ public class PlayerController : MonoBehaviour
     {
         //三元運算符，根據physicsCheck.isGround的值是與否，將碰撞器的物理材料設置為 normal 或 wall
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;
+
+        //如果蹬牆中，y的速度/2，記得X速度不能變成0
+        if(physicsCheck.onWall)
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y/2f);
+        else
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
     }
 
 

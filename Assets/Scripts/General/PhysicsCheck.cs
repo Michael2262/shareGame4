@@ -8,10 +8,13 @@ using UnityEngine;
 public class PhysicsCheck : MonoBehaviour
 {
     private CapsuleCollider2D coll;
-    
+    private PlayerController playerController;
+    private Rigidbody2D rb;
 
     [Header("檢測參數")]
     public bool manual;
+    //有些東西只有在玩家角色身上才要啟用，增加手動開關
+    public bool isPlayer;
     public Vector2 bottomOffset;
     public Vector2 leftOffset;
     public Vector2 rightOffset;
@@ -24,11 +27,13 @@ public class PhysicsCheck : MonoBehaviour
     public bool isGround;
     public bool touchLeftWall;
     public bool touchRightWall;
+    public bool onWall;
 
 
     private void Awake()
     {
         coll = GetComponent<CapsuleCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
         
 
         if (!manual) 
@@ -39,6 +44,9 @@ public class PhysicsCheck : MonoBehaviour
             leftOffset = new Vector2(-rightOffset.x, rightOffset.y);
             
         }
+        //只有在玩家角色身上才要啟用，以手動開關
+        if (isPlayer) 
+            playerController = GetComponent<PlayerController>();
 
     }
 
@@ -50,14 +58,20 @@ public class PhysicsCheck : MonoBehaviour
 
     void check() 
     {
-        faceDir = new Vector3(-transform.localScale.x, 0, 0);
+        if (!onWall)
+            faceDir = new Vector3(-transform.localScale.x, bottomOffset.y, 0);
+        else
+            faceDir = new Vector3(-transform.localScale.x, 0, 0);
         //檢測地面
         isGround = Physics2D.OverlapCircle((Vector2)transform.position + (bottomOffset* -faceDir.x), checkRaduis, groundLayer);
-
+        
         //牆體判斷
         touchLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, checkRaduis, groundLayer);
         touchRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, checkRaduis, groundLayer);
 
+        //蹬牆中判斷
+        if(isPlayer)
+            onWall = (touchLeftWall &&playerController.inputDirection.x<0f  || touchRightWall && playerController.inputDirection.x>0f) && rb.velocity.y < 0f;
     }
 
     //Gizmo輔助線
