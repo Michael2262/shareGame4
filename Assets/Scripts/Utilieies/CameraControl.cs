@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 //要using Cinemachine;
 using Cinemachine;
@@ -7,10 +8,29 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     private CinemachineConfiner2D confiner2D;
+    public CinemachineImpulseSource ImpulseSource;
+    //事件監聽
+    public VoidEventSO cameraShakeEvent;
+
 
     private void Awake()
     {
         confiner2D = GetComponent<CinemachineConfiner2D>();
+    }
+
+    private void OnEnable()
+    {
+        cameraShakeEvent.OnEventRaised += OnCameraShakeEvent;
+    }
+
+
+    private void OnDisable()
+    {
+        cameraShakeEvent.OnEventRaised -= OnCameraShakeEvent;
+    }
+    private void OnCameraShakeEvent()
+    {
+        ImpulseSource.GenerateImpulse();
     }
 
     //TODO ：場景切換後更改
