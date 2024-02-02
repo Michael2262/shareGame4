@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
         waitTimeCounter = waitTime;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         
         if(ImageDirRight)
