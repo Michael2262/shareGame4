@@ -73,13 +73,13 @@ public class Character : MonoBehaviour
         {
             currentHealth -= (attacker.damage);
             TriggerInvulnerable();
-            //執行受傷註冊事件(?避免沒有)，Invoke是啟動。註冊事件時，規定需要一個transform
+            //"執行所有受傷註冊事件"(?避免沒有)，Invoke是啟動。註冊事件時，規定需要一個transform
             OnTakeDamage?.Invoke(attacker.transform);
         }
         else 
         {
             currentHealth = 0;
-            //觸發死亡
+            //"執行所有死亡註冊事件"
             OnDie?.Invoke(attacker.transform) ;
         }
 

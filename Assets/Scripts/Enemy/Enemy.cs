@@ -1,61 +1,61 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-//¤@©w­n¦³ªº²Õ¥ó¡A¨S¦³ªº·|¦Û°Ê²K¥[
+//ä¸€å®šè¦æœ‰çš„çµ„ä»¶ï¼Œæ²’æœ‰çš„æœƒè‡ªå‹•æ·»åŠ 
 [RequireComponent(typeof(Rigidbody2D),typeof(Animator),typeof(PhysicsCheck))]
 
 
 public class Enemy : MonoBehaviour
 {
-    //[HideInInspector]¤£»İ¼ÉÅS¦bInspector
+    //[HideInInspector]ä¸éœ€æš´éœ²åœ¨Inspector
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public PhysicsCheck physicsCheck;
     [HideInInspector] public Animator anim;
     
-    [Header("°ò¥»°Ñ¼Æ")]
+    [Header("åŸºæœ¬åƒæ•¸")]
     public float normalSpeed;
     public float chaseSpeed;
     [HideInInspector] public float currentSpeed;
     public bool ImageDirRight;
     public Vector3 faceDir;
     public float hurtForce;
-    //°_©l¦ì¸m¡A·|¦bawake³Q°O¿ı
+    //èµ·å§‹ä½ç½®ï¼Œæœƒåœ¨awakeè¢«è¨˜éŒ„
     public Vector3 spwanPoint;
 
     public Transform attacker;
 
-    [Header("ÀË´ú")]
+    [Header("æª¢æ¸¬")]
     public Vector2 centerOffset;
     public Vector2 checkSize;
     public float checkDistance;
     public LayerMask attackLayer;
 
-    [Header("­p®É¾¹")]
+    [Header("è¨ˆæ™‚å™¨")]
     public float waitTime;
     public float waitTimeCounter;
     public bool wait;
     public float lostTime;
     public float lostTimeCounter;
 
-    [Header("ª¬ºA")]
+    [Header("ç‹€æ…‹")]
     public bool isHurt;
     public bool isDead;
 
 
-    //©â¶HÃş¡A¬Æ»ò®É­Ô¹ê¨Ò¤Æ³o¨Çª¬ºA©O?¦b©Çª«¤l¶°¤¤(¨Ò¦pBoar)¤¤³Ğ«Ø(½á­È)
-    //·í«eª¬ºA
+    //æŠ½è±¡é¡ï¼Œç”šéº¼æ™‚å€™å¯¦ä¾‹åŒ–é€™äº›ç‹€æ…‹å‘¢?åœ¨æ€ªç‰©å­é›†ä¸­(ä¾‹å¦‚Boar)ä¸­å‰µå»º(è³¦å€¼)
+    //ç•¶å‰ç‹€æ…‹
     protected BaseState currentState;
-    //¨µÅŞª¬ºA
+    //å·¡é‚ç‹€æ…‹
     protected BaseState patrolState;
-    //°lÀ»ª¬ºA
+    //è¿½æ“Šç‹€æ…‹
     protected BaseState chaseState;
-    //¯S®í§Ş¯àª¬ºA
+    //ç‰¹æ®ŠæŠ€èƒ½ç‹€æ…‹
     protected BaseState skillState;
 
-    #region ¶g´Á¨ç¼Æ
-    //ªí¥Ü³o­Ó¤èªk¬O¤@­ÓµêÀÀ¤èªk¡A¥i¥H³Q¤lÃş§OÂĞ¼g¡C·í¤lÃş§OÂĞ¼g³o­Ó¤èªk®É¡A¥¦¥i¥H´£¨Ñ¦Û¤vªº¹ê²{¡C
+    #region é€±æœŸå‡½æ•¸
+    //è¡¨ç¤ºé€™å€‹æ–¹æ³•æ˜¯ä¸€å€‹è™›æ“¬æ–¹æ³•ï¼Œå¯ä»¥è¢«å­é¡åˆ¥è¦†å¯«ã€‚ç•¶å­é¡åˆ¥è¦†å¯«é€™å€‹æ–¹æ³•æ™‚ï¼Œå®ƒå¯ä»¥æä¾›è‡ªå·±çš„å¯¦ç¾ã€‚
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -64,12 +64,12 @@ public class Enemy : MonoBehaviour
         currentSpeed = normalSpeed;
         spwanPoint = transform.position;
     }
-    //ª«Åé³Q¿E¬¡®É
+    //ç‰©é«”è¢«æ¿€æ´»æ™‚
     private void OnEnable()
     {
         currentState = patrolState;
         currentState.OnEnter(this);
-        //©I¥s·í«e"ª¬ºA"ªº OnEnable ¤èªk¡A¨Ã±N·í«eª«¥óªº¤Ş¥Î this ¶Ç»¼µ¹¸Ó¤èªk¡C(ª¬ºA¾÷)
+        //å‘¼å«ç•¶å‰"ç‹€æ…‹"çš„ OnEnable æ–¹æ³•ï¼Œä¸¦å°‡ç•¶å‰ç‰©ä»¶çš„å¼•ç”¨ this å‚³éçµ¦è©²æ–¹æ³•ã€‚(ç‹€æ…‹æ©Ÿ)
     }
 
     private void Start()
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         TimeCounter();
     }
 
-    //ª«²z¬ÛÃö
+    //ç‰©ç†ç›¸é—œ
     private void FixedUpdate()
     {
         if(!isHurt && !isDead && !wait)
@@ -103,17 +103,17 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    #region ¨ç¼Æ¤èªk
+    #region å‡½æ•¸æ–¹æ³•
 
-    //virtual¥i¦b¤lÃş¤¤¡A¥Îoverride½Æ¼g
+    //virtualå¯åœ¨å­é¡ä¸­ï¼Œç”¨overrideè¤‡å¯«
     public virtual void Move()
     {
-        //¤@­Ó½½¤ûªºÃB¥~±ø¥ó§PÂ_¡A¦pªG°Êµe¨S¦³¼·²Ä0¼hªº"snailPreMove"¡A¤~·|°Ê§@
+        //ä¸€å€‹è¸ç‰›çš„é¡å¤–æ¢ä»¶åˆ¤æ–·ï¼Œå¦‚æœå‹•ç•«æ²’æœ‰æ’¥ç¬¬0å±¤çš„"snailPreMove"ï¼Œæ‰æœƒå‹•ä½œ
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("snailPreMove") && !anim.GetCurrentAnimatorStateInfo(0).IsName("snailRecover"))
             rb.velocity = new Vector2(currentSpeed * faceDir.x * Time.deltaTime,rb.velocity.y);
     }
 
-    //©Ò¦³¸ò­p®É¾¹¬ÛÃö¡A³£©ñ³o¨à
+    //æ‰€æœ‰è·Ÿè¨ˆæ™‚å™¨ç›¸é—œï¼Œéƒ½æ”¾é€™å…’
     public void TimeCounter()
     {
         if (wait) 
@@ -136,12 +136,12 @@ public class Enemy : MonoBehaviour
     public virtual bool FoundPlayer()
     {
         //var Temp =  Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
-        //³o¼Ë¥i¥HÀË´ú¨ì©³¬O¬Æ»òÃş«¬ªº­È¡A¤W­±¬O RayCastHitªº­È¡A¦ı¥ô¦ó­È³£¥i¥H¬Obool
+        //é€™æ¨£å¯ä»¥æª¢æ¸¬åˆ°åº•æ˜¯ç”šéº¼é¡å‹çš„å€¼ï¼Œä¸Šé¢æ˜¯ RayCastHitçš„å€¼ï¼Œä½†ä»»ä½•å€¼éƒ½å¯ä»¥æ˜¯bool
         return Physics2D.BoxCast(transform.position + (Vector3)centerOffset, checkSize, 0, faceDir, checkDistance, attackLayer);
         
     }
 
-    //¨C¦¸­n´«ª¬ºA®É¡A½Õ¥Î¦¹¤èªk¡A¨Ó¦ÛEnumsªºªTÁ|ÅÜ¶q
+    //æ¯æ¬¡è¦æ›ç‹€æ…‹æ™‚ï¼Œèª¿ç”¨æ­¤æ–¹æ³•ï¼Œä¾†è‡ªEnumsçš„æšèˆ‰è®Šé‡
     public void SwitchState(NPCState state) 
     {
         var newState = state switch
@@ -174,53 +174,58 @@ public class Enemy : MonoBehaviour
 
 
 
-    #region Unity¨Æ¥ó°õ¦æ¤èªk
+    #region Unityäº‹ä»¶åŸ·è¡Œæ–¹æ³•
     public void OnTakeDamage( Transform attackTrans) 
     {
-        attacker = attackTrans;
-        //Âà¨­
+        //attacker = attackTrans;
+        //è½‰èº«
         if (attackTrans.position.x - transform.position.x > 0)
             transform.localScale = new Vector3(-1,1,1);
         if (attackTrans.position.x - transform.position.x < 0)
             transform.localScale = new Vector3(1,1,1);
 
-        //¨ü¶Ë³QÀ»°h
+        //å—å‚·è¢«æ“Šé€€
         isHurt = true;
         anim.SetTrigger("hurt");
-        Vector2 dir = new Vector2((transform.position.x - attackTrans.position.x), 0).normalized;
+        //Vector2 dir = new Vector2((transform.position.x - attackTrans.position.x), 0).normalized;
         rb.velocity = new Vector2(0, rb.velocity.y);    
-        //"±Ò°Ê¨óµ{"ªº©T©w¼gªk(¶¶«K§âÁ{®ÉÅÜ¶qdir¶Ç¶i¥h)
+        //"å•Ÿå‹•å”ç¨‹"çš„å›ºå®šå¯«æ³•(é †ä¾¿æŠŠè‡¨æ™‚è®Šé‡dirå‚³é€²å»)
         StartCoroutine(KnockBack(attackTrans));
     }
 
     public void OnDie(Transform attackTrans)
     {
 
+        
+        
         gameObject.layer = 2;
-        anim.SetBool("dead", true);
         isDead = true;
+        anim.SetBool("dead", true);
+        rb.velocity = new Vector2(0, rb.velocity.y);
         StartCoroutine(KnockBack(attackTrans));
 
     }
 
 
 
-    //IEnumerable¡A¥NªíµÛ¤@­Ó¥i¥H«ö§Ç¦C­¡¥Nªº¶°¦X¡Cªğ¦^¤@­Ó¨óµ{¡C
-    //À»°h§@¥Î
+    //IEnumerableï¼Œä»£è¡¨è‘—ä¸€å€‹å¯ä»¥æŒ‰åºåˆ—è¿­ä»£çš„é›†åˆã€‚è¿”å›ä¸€å€‹å”ç¨‹ã€‚
+    //æ“Šé€€ä½œç”¨
     private IEnumerator KnockBack(Transform attackTrans) 
     {
-
+        
+        //.normalizedï¼šè¿™ä¸ªæ–¹æ³•ç”¨äºå°†å¾—åˆ°çš„å‘é‡è¿›è¡Œæ ‡å‡†åŒ–ï¼Œå³å°†å‘é‡çš„é•¿åº¦å½’ä¸€åŒ–ä¸º 1ï¼Œä¿æŒæ–¹å‘ä¸å˜ã€‚
         Vector2 dir = new Vector2((transform.position.x - attackTrans.position.x), 0).normalized;
         rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
-        //¨Ï¥ÎisDeadªº­È¨ÓÀË¬dÀ³¸Ó¨Ï¥Î­ş­Óµ¥«İ®É¶¡¡C
-        float waitTime = isDead ? 1.2f : 0.7f;
+
+        //ä½¿ç”¨isDeadçš„å€¼ä¾†æª¢æŸ¥æ‡‰è©²ä½¿ç”¨å“ªå€‹ç­‰å¾…æ™‚é–“ã€‚
+        float waitTime = isDead ? 1.2f : 0.6f;
         yield return new WaitForSeconds(waitTime);
         isHurt = false;
-        isDead = false;
+        //isDead = false;
     }
 
     
-    //¦º¤`°Êµe¼·©ñ¨ì³Ì«á®É½Õ¥Î
+    //æ­»äº¡å‹•ç•«æ’¥æ”¾åˆ°æœ€å¾Œæ™‚èª¿ç”¨
     public void DestroyAfterAnimation()
     {
         Destroy(this.gameObject);

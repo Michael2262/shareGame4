@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 76610061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.68, y: -3.64, z: 0}
+  m_LocalPosition: {x: -7.1, y: 0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -272,9 +272,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 76610070}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnTakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDie:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 76610070}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []
@@ -386,7 +410,7 @@ MonoBehaviour:
   currentSpeed: 0
   ImageDirRight: 0
   faceDir: {x: 0, y: 0, z: 0}
-  hurtForce: 0
+  hurtForce: 9
   spwanPoint: {x: 0, y: 0, z: 0}
   attacker: {fileID: 0}
   centerOffset: {x: 3.32, y: 0.71}
@@ -395,11 +419,11 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 256
-  waitTime: 5
-  waitTimeCounter: 0
+  waitTime: 2
+  waitTimeCounter: 2
   wait: 0
-  lostTime: 0
-  lostTimeCounter: 0
+  lostTime: 3
+  lostTimeCounter: 3
   isHurt: 0
   isDead: 0
 --- !u!114 &76610071
@@ -1383,7 +1407,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.71, y: 5.19, z: -10}
+  m_LocalPosition: {x: -11.98, y: -6.9799995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1492,7 +1516,7 @@ Transform:
   m_GameObject: {fileID: 519487273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.71, y: 5.19, z: -10}
+  m_LocalPosition: {x: -11.98, y: -6.9799995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8823,7 +8847,7 @@ Transform:
   m_GameObject: {fileID: 988129670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.81, y: 3.73, z: 0}
+  m_LocalPosition: {x: -11.6, y: -7.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8885,12 +8909,12 @@ MonoBehaviour:
   currentSpeed: 0
   ImageDirRight: 0
   faceDir: {x: 0, y: 0, z: 0}
-  hurtForce: 3
+  hurtForce: 9
   spwanPoint: {x: 0, y: 0, z: 0}
   attacker: {fileID: 0}
   centerOffset: {x: 0, y: 0}
   checkSize: {x: 0, y: 0}
-  checkDistance: 3.2
+  checkDistance: 6.25
   attackLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -10708,7 +10732,7 @@ Transform:
   m_GameObject: {fileID: 1553417426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.09, y: 3.72, z: 0}
+  m_LocalPosition: {x: -14.36, y: -8.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10815,7 +10839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manual: 1
   isPlayer: 1
-  bottomOffset: {x: -0.05, y: 0}
+  bottomOffset: {x: -0.05, y: 0.1}
   leftOffset: {x: -0.46, y: 0.88}
   rightOffset: {x: 0.32, y: 0.88}
   checkRaduis: 0.2
@@ -11903,7 +11927,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 21, y: -5, z: 0}
@@ -11914,7 +11938,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 22, y: -5, z: 0}
@@ -12869,7 +12893,7 @@ Transform:
   m_GameObject: {fileID: 6837400931391582581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: -2.55, z: 0}
+  m_LocalPosition: {x: -26.34, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12987,7 +13011,7 @@ MonoBehaviour:
   currentSpeed: 60
   ImageDirRight: 0
   faceDir: {x: -1, y: 0, z: 0}
-  hurtForce: 5
+  hurtForce: 6
   spwanPoint: {x: 0, y: 0, z: 0}
   attacker: {fileID: 0}
   centerOffset: {x: 0, y: 0.6}
@@ -13358,7 +13382,7 @@ Transform:
   m_GameObject: {fileID: 4810639103886594541}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.19, y: 7.47, z: 0}
+  m_LocalPosition: {x: -8.45, y: 4.7, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
