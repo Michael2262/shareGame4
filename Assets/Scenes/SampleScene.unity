@@ -347,7 +347,7 @@ MonoBehaviour:
   leftOffset: {x: -2.02, y: 0.61}
   rightOffset: {x: 1.65, y: 0.61}
   checkRaduis: 0.16
-  faceDir: {x: 0, y: 0, z: 0}
+  faceDir: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1407,7 +1407,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.98, y: -6.9799995, z: -10}
+  m_LocalPosition: {x: -24.599998, y: 4.02, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1516,7 +1516,7 @@ Transform:
   m_GameObject: {fileID: 519487273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.98, y: -6.9799995, z: -10}
+  m_LocalPosition: {x: -24.599998, y: 4.02, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8847,7 +8847,7 @@ Transform:
   m_GameObject: {fileID: 988129670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.6, y: -7.39, z: 0}
+  m_LocalPosition: {x: -14.94, y: -7.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8944,7 +8944,7 @@ MonoBehaviour:
   leftOffset: {x: 0, y: 0}
   rightOffset: {x: 0, y: 0}
   checkRaduis: 0
-  faceDir: {x: 0, y: 0, z: 0}
+  faceDir: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -10732,7 +10732,7 @@ Transform:
   m_GameObject: {fileID: 1553417426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.36, y: -8.45, z: 0}
+  m_LocalPosition: {x: -26.98, y: 2.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10817,6 +10817,7 @@ MonoBehaviour:
   inputDirection: {x: 0, y: 0}
   speed: 290
   jumpForce: 16.5
+  wallJumpForce: 6.5
   normal: {fileID: 6200000, guid: 8b2b4df620d729a409bd6fea1d016b56, type: 2}
   wall: {fileID: 6200000, guid: ca90f821d2418364a9d606bee9f69c05, type: 2}
   crouchJumpForce: 24
@@ -10825,6 +10826,7 @@ MonoBehaviour:
   isHurt: 0
   isDead: 0
   isAttack: 0
+  wallJump: 0
 --- !u!114 &1553417432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10843,7 +10845,7 @@ MonoBehaviour:
   leftOffset: {x: -0.46, y: 0.88}
   rightOffset: {x: 0.32, y: 0.88}
   checkRaduis: 0.2
-  faceDir: {x: 0, y: 0, z: 0}
+  faceDir: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -11839,7 +11841,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 17, y: -6, z: 0}
@@ -11938,7 +11940,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 22, y: -5, z: 0}
@@ -12114,7 +12116,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 24, y: -3, z: 0}
@@ -12136,7 +12138,7 @@ Tilemap:
       - {fileID: -567403930, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 574102959, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 2090006402, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 17, y: -2, z: 0}
@@ -12301,7 +12303,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 18, y: 0, z: 0}
@@ -12367,7 +12369,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 18, y: 1, z: 0}
@@ -12378,7 +12380,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: 2, z: 0}
@@ -12876,7 +12878,7 @@ MonoBehaviour:
   leftOffset: {x: -0.96, y: 0.55}
   rightOffset: {x: 0.94, y: 0.55}
   checkRaduis: 0.1
-  faceDir: {x: 0, y: 0, z: 0}
+  faceDir: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -12893,7 +12895,7 @@ Transform:
   m_GameObject: {fileID: 6837400931391582581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.34, y: 2.5, z: 0}
+  m_LocalPosition: {x: -11.11, y: -8.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12962,7 +12964,7 @@ MonoBehaviour:
   leftOffset: {x: -1.31, y: 0.62}
   rightOffset: {x: 1.14, y: 0.62}
   checkRaduis: 0.1
-  faceDir: {x: 0, y: 0, z: 0}
+  faceDir: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -13360,10 +13362,10 @@ GameObject:
   - component: {fileID: 8619029310605429699}
   - component: {fileID: 4770817906804248671}
   - component: {fileID: 4973731731189418362}
+  - component: {fileID: 4564488495839205040}
   - component: {fileID: 4826517755506982188}
   - component: {fileID: 5148137122153432283}
   - component: {fileID: 1662352424091591823}
-  - component: {fileID: 4564488495839205040}
   - component: {fileID: 6671331347923482976}
   - component: {fileID: 1513082935362798770}
   m_Layer: 9

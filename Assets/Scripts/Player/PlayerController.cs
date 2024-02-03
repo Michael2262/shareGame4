@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float runSpeed;
     private float walkSpeed => speed / 2.5f;
     public float jumpForce;
+    public float wallJumpForce;
     //public int combo;
 
     private Vector2 originaOffset;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public bool isHurt;
     public bool isDead;
     public bool isAttack;
+    public bool wallJump; 
 
     private void Awake()
     {
@@ -115,7 +117,7 @@ public class PlayerController : MonoBehaviour
     {
         //主要移動方法
         //velocity=速度。Time.deltaTime=時間修正(可以讓不同設備沒有時間差)
-        if(!isCrouch || !physicsCheck.isGround)
+        if((!isCrouch || !physicsCheck.isGround) && !wallJump)
             rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime,rb.velocity.y);
 
         //臨時變量，藉由(int)將浮點數強制改成int
@@ -155,8 +157,13 @@ public class PlayerController : MonoBehaviour
         //{
             if (physicsCheck.isGround && !isCrouch)
                 rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-            if (physicsCheck.isGround && isCrouch)
+            else if (physicsCheck.isGround && isCrouch)
                 rb.AddForce(transform.up * crouchJumpForce, ForceMode2D.Impulse);
+            else if (physicsCheck.onWall) 
+            {
+                wallJump = true;    
+                rb.AddForce(new Vector2(-inputDirection.x,5f) * wallJumpForce,ForceMode2D.Impulse);
+            }
         //}
         
     }
@@ -189,6 +196,10 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y/2f);
         else
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+
+
+        if(wallJump && rb.velocity.y<0f)
+            wallJump = false;
     }
 
 

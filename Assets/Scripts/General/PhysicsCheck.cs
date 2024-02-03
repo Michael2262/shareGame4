@@ -1,8 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//¤@©w­n¦³ªº²Õ¥ó¡A¨S¦³ªº·|¦Û°Ê²K¥[
+//ä¸€å®šè¦æœ‰çš„çµ„ä»¶ï¼Œæ²’æœ‰çš„æœƒè‡ªå‹•æ·»åŠ 
 //[RequireComponent(typeof(CapsuleCollider2D),typeof(BoxCollider2D))]
 
 public class PhysicsCheck : MonoBehaviour
@@ -11,19 +11,20 @@ public class PhysicsCheck : MonoBehaviour
     private PlayerController playerController;
     private Rigidbody2D rb;
 
-    [Header("ÀË´ú°Ñ¼Æ")]
+    [Header("æª¢æ¸¬åƒæ•¸")]
     public bool manual;
-    //¦³¨ÇªF¦è¥u¦³¦bª±®a¨¤¦â¨­¤W¤~­n±Ò¥Î¡A¼W¥[¤â°Ê¶}Ãö
+    //æœ‰äº›æ±è¥¿åªæœ‰åœ¨ç©å®¶è§’è‰²èº«ä¸Šæ‰è¦å•Ÿç”¨ï¼Œå¢åŠ æ‰‹å‹•é–‹é—œ
     public bool isPlayer;
     public Vector2 bottomOffset;
     public Vector2 leftOffset;
     public Vector2 rightOffset;
     public float checkRaduis;
-    public Vector3 faceDir;
+    //åˆ©ç”¨faceDirå¯¦ç¾è½‰å‘æ™‚èª¿æ•´åœ°é¢åˆ¤æ–·é»
+    public Vector2 faceDir;
 
     public LayerMask groundLayer;    
     
-    [Header("ª¬ºA")]
+    [Header("ç‹€æ…‹")]
     public bool isGround;
     public bool touchLeftWall;
     public bool touchRightWall;
@@ -38,13 +39,13 @@ public class PhysicsCheck : MonoBehaviour
 
         if (!manual) 
         {
-            //¥]³ò®Ø¡]Bounds¡^
+            //åŒ…åœæ¡†ï¼ˆBoundsï¼‰
             rightOffset = new Vector2((coll.bounds.size.x + coll.offset.x) / 2, coll.bounds.size.y / 2);
-            //ª½±µ¨Ï¥Î¤W¤@¦æªº­È
+            //ç›´æ¥ä½¿ç”¨ä¸Šä¸€è¡Œçš„å€¼
             leftOffset = new Vector2(-rightOffset.x, rightOffset.y);
             
         }
-        //¥u¦³¦bª±®a¨¤¦â¨­¤W¤~­n±Ò¥Î¡A¥H¤â°Ê¶}Ãö
+        //åªæœ‰åœ¨ç©å®¶è§’è‰²èº«ä¸Šæ‰è¦å•Ÿç”¨ï¼Œä»¥æ‰‹å‹•é–‹é—œ
         if (isPlayer) 
             playerController = GetComponent<PlayerController>();
 
@@ -58,26 +59,34 @@ public class PhysicsCheck : MonoBehaviour
 
     void check() 
     {
-        if (!onWall)
-            faceDir = new Vector3(-transform.localScale.x, bottomOffset.y, 0);
-        else
-            faceDir = new Vector3(-transform.localScale.x, 0, 0);
-        //ÀË´ú¦a­±
-        isGround = Physics2D.OverlapCircle((Vector2)transform.position + (bottomOffset* -faceDir.x), checkRaduis, groundLayer);
+        //æª¢æ¸¬åœ°é¢
+        //æœ‰ä¸¤ä¸ªå‘é‡ v1 = (x1, y1) å’Œ v2 = (x2, y2)ï¼Œå®ƒä»¬çš„é€åˆ†é‡ç›¸ä¹˜ç»“æœå°±æ˜¯ (x1 * x2, y1 * y2)ã€‚è¿™ä¸ªæ“ä½œåœ¨æ•°å­¦ä¸Šä¹Ÿç§°ä¸ºç‚¹ä¹˜æˆ–è€…å†…ç§¯
+        if (!onWall) //æ­£å¸¸ç‹€æ³
+        {
+            faceDir = new Vector2(-transform.localScale.x, 0);
+            isGround = Physics2D.OverlapCircle((Vector2)transform.position + (bottomOffset * -faceDir.x), checkRaduis, groundLayer);
+        }
+        else //ç›®å‰åªæœ‰ç©å®¶èƒ½é‡åˆ°ï¼Œé„§ç‰†ç‹€æ…‹
+        {
+            //faceDir = new Vector2(-transform.localScale.x, -1);
+            isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(0,1), checkRaduis, groundLayer);
+        }
+            
+       
         
-        //ÀğÅé§PÂ_
+        //ç‰†é«”åˆ¤æ–·
         touchLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset, checkRaduis, groundLayer);
         touchRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, checkRaduis, groundLayer);
 
-        //ÃŞÀğ¤¤§PÂ_
+        //è¹¬ç‰†ä¸­åˆ¤æ–·
         if(isPlayer)
-            onWall = (touchLeftWall &&playerController.inputDirection.x<0f  || touchRightWall && playerController.inputDirection.x>0f) && rb.velocity.y < 0f;
+            onWall = (touchLeftWall && playerController.inputDirection.x<0f  || touchRightWall && playerController.inputDirection.x>0f) && rb.velocity.y < 0f;
     }
 
-    //Gizmo»²§U½u
+    //Gizmoè¼”åŠ©ç·š
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere((Vector2)transform.position + (bottomOffset * -faceDir.x), checkRaduis);
+        Gizmos.DrawWireSphere((Vector2)transform.position + (bottomOffset), checkRaduis);
         Gizmos.DrawWireSphere((Vector2)transform.position + leftOffset, checkRaduis);
         Gizmos.DrawWireSphere((Vector2)transform.position + rightOffset, checkRaduis);
     }

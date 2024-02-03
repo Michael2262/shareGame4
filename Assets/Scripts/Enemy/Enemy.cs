@@ -187,7 +187,7 @@ public class Enemy : MonoBehaviour
         //受傷被擊退
         isHurt = true;
         anim.SetTrigger("hurt");
-        //Vector2 dir = new Vector2((transform.position.x - attackTrans.position.x), 0).normalized;
+        //停止繼續前進
         rb.velocity = new Vector2(0, rb.velocity.y);    
         //"啟動協程"的固定寫法(順便把臨時變量dir傳進去)
         StartCoroutine(KnockBack(attackTrans));
