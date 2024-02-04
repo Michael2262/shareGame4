@@ -10673,6 +10673,7 @@ GameObject:
   - component: {fileID: 1117861655}
   - component: {fileID: 1117861657}
   - component: {fileID: 1117861656}
+  - component: {fileID: 1117861658}
   m_Layer: 0
   m_Name: Attack1
   m_TagString: Untagged
@@ -10762,6 +10763,21 @@ PolygonCollider2D:
       - {x: 1.584835, y: 0.5845157}
       - {x: 2.4733453, y: 0.9090023}
   m_UseDelaunayMesh: 0
+--- !u!114 &1117861658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117861654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f919b0d4260734e822c9f6a9178246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playAudioEvent: {fileID: 11400000, guid: 934e00d0dcf1a1d4bb0aadf2912cfb41, type: 2}
+  audioclip: {fileID: 8300000, guid: bc5a2b7e1aa854877a8ba7ca3edd06d4, type: 3}
+  playOnEnable: 1
 --- !u!1 &1142423834
 GameObject:
   m_ObjectHideFlags: 0
@@ -10961,6 +10977,7 @@ GameObject:
   - component: {fileID: 1444634956}
   - component: {fileID: 1444634958}
   - component: {fileID: 1444634957}
+  - component: {fileID: 1444634959}
   m_Layer: 0
   m_Name: Attack3
   m_TagString: Untagged
@@ -11048,6 +11065,21 @@ PolygonCollider2D:
       - {x: 0.693672, y: 0.48515216}
       - {x: 2.7805207, y: 0.1206969}
   m_UseDelaunayMesh: 0
+--- !u!114 &1444634959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444634955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f919b0d4260734e822c9f6a9178246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playAudioEvent: {fileID: 11400000, guid: 934e00d0dcf1a1d4bb0aadf2912cfb41, type: 2}
+  audioclip: {fileID: 8300000, guid: 9d413a02bad5641cb9f444333d269acb, type: 3}
+  playOnEnable: 1
 --- !u!1 &1452849558
 GameObject:
   m_ObjectHideFlags: 0
@@ -12004,7 +12036,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: -7, z: 0}
@@ -12452,8 +12484,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c501cb5dc29d645859231bac81707e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FxEvent: {fileID: 0}
+  BGMEvent: {fileID: 0}
   BGMSource: {fileID: 1680328727}
-  SFXSource: {fileID: 1680328728}
+  FXSource: {fileID: 0}
 --- !u!4 &1680328730
 Transform:
   m_ObjectHideFlags: 0
@@ -13248,7 +13282,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 23, y: -6, z: 0}
@@ -13314,7 +13348,7 @@ Tilemap:
       - {fileID: 264369734, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1209228713, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 184922570, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7
+      m_AnimationSpeed: 7.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 23, y: -5, z: 0}
@@ -13644,7 +13678,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: 0, z: 0}
@@ -13710,7 +13744,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: 1, z: 0}
@@ -13743,7 +13777,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: 2, z: 0}
@@ -13776,7 +13810,7 @@ Tilemap:
       - {fileID: 1977646442, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: -1872227024, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
       - {fileID: 609672961, guid: fe8667f284eae144e888c3342abc3e9d, type: 3}
-      m_AnimationSpeed: 7.0000005
+      m_AnimationSpeed: 7
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 16, y: 3, z: 0}
@@ -14119,6 +14153,7 @@ GameObject:
   - component: {fileID: 2086076660}
   - component: {fileID: 2086076662}
   - component: {fileID: 2086076661}
+  - component: {fileID: 2086076663}
   m_Layer: 0
   m_Name: Attack2
   m_TagString: Untagged
@@ -14208,6 +14243,21 @@ PolygonCollider2D:
       - {x: 1.1001334, y: 0.8542213}
       - {x: 0.9413881, y: 1.2331462}
   m_UseDelaunayMesh: 0
+--- !u!114 &2086076663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086076659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f919b0d4260734e822c9f6a9178246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playAudioEvent: {fileID: 11400000, guid: 934e00d0dcf1a1d4bb0aadf2912cfb41, type: 2}
+  audioclip: {fileID: 8300000, guid: bc5a2b7e1aa854877a8ba7ca3edd06d4, type: 3}
+  playOnEnable: 1
 --- !u!114 &1513082935362798770
 MonoBehaviour:
   m_ObjectHideFlags: 0
