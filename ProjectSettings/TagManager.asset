@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Bounds
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Platform
   - Player
   - Enemy
-  - 
+  - Water
   - 
   - 
   - 
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: Bounds
     uniqueID: 3892116101
+    locked: 0
+  - name: Water
+    uniqueID: 117807801
     locked: 0

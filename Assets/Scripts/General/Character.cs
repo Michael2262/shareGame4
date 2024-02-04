@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 //調用unity事件
 using UnityEngine.Events;
@@ -58,6 +59,19 @@ public class Character : MonoBehaviour
                 controlable = true;
             }
 
+        }
+
+    }
+
+    //觸到特定Collider2D時啟用
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Water")) 
+        {
+            currentHealth = 0;
+            OnHealthChange?.Invoke(this);
+            //"執行所有死亡註冊事件"
+            OnDie?.Invoke(null);
         }
 
     }
