@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+//事件相關須套用
+using UnityEngine.Events;
 
-public class PlayAudioEventSO : MonoBehaviour
+//音樂相關的事件訂閱
+//資產文件
+[CreateAssetMenu(menuName = "Event/PlayAudioEventSO")]
+
+public class PlayAudioEventSO : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public UnityAction<AudioClip> OnEventRaised;
 
-    // Update is called once per frame
-    void Update()
+    
+    public void RaiseEvent(AudioClip audioClip)
     {
-        
+        OnEventRaised?.Invoke(audioClip);
     }
 }
