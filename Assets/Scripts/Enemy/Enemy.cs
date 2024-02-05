@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        waitTimeCounter = waitTime;
+        //waitTimeCounter = waitTime;
     }
 
     protected virtual void Update()
