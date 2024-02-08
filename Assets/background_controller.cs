@@ -5,7 +5,7 @@ using UnityEngine;
 public class background_controller : MonoBehaviour
 {
     // 背景移動速度
-    public float speed = 2f ; 
+    public float speed = 0f ; 
     // 背景尺寸
     private float backgroundSize;
     // Start is called before the first frame update
